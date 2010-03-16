@@ -1,0 +1,28 @@
+Automate "CFBundleGetInfoString" in Info.plist
+
+re-create bookviewer.nib w/o vrbigwordview requirement
+
+Open "Hamlet.txt" on start
+
+PrefPane:
+* foregroundColor
+* backgroundColor
+* fontFamily
+
+full-screen view
+
+Keyboard control:
+* space to togglePlayAndPause
+* arrow keys for next/previous word
+
+Silder is backwards: right is slower, should be faster.
+
+Icon
+
+Show/hide controls?
+
+Playback:
+* show articles with next word
+* length of word determines display time
+
+Help book?
