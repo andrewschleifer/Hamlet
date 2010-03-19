@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>NSDocumentClass</key>
+            <string>Book</string>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleTypeName</key>
+            <string>Plain text</string>
+			<key>CFBundleTypeIconFile</key>
+			<string></string>
+            <key>CFBundleTypeExtensions</key>
+            <array>
+                <string>txt</string>
+            </array>
+            <key>CFBundleTypeMIMETypes</key>
+            <array>
+                <string>text/plain</string>
+            </array>
+            <key>CFBundleTypeOSTypes</key>
+            <array>
+                <string>TXT</string>
+            </array>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>public.plain-text</string>
+            </array>
+        </dict>
+    </array>
+
+    <key>CFBundleExecutable</key>
+    <string><%=EXE%></string>
+    <key>CFBundleIdentifier</key>
+    <string><%=BUNDLEID%></string>
+
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+
+    <key>CFBundleIconFile</key>
+    <string>icon</string>
+    <key>NSMainNibFile</key>
+    <string>main</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+
+    <key>CFBundleVersion</key>
+    <string><%=File.read('version.txt')%></string>
+    <key>CFBundleShortVersionString</key>
+    <string>2.0</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>© 2006-2008 Various Artists</string>
+</dict>
+</plist>

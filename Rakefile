@@ -1,0 +1,58 @@
+require 'rake'
+require 'rake/clean'
+require 'erb'
+
+NAME = "Hamlet"
+BUNDLEID = "com.mutant-atomic.#{NAME}"
+RESOURCES = ['main.rb', 'main.nib', 'book.rb', 'book.nib', 'Hamlet.txt']
+FRAMEWORKS = ['RubyCocoa', 'Cocoa']
+COMPILE = ['main.m', 'WordView.m']
+
+EXE = "#{NAME}"
+APP = "#{NAME}.app"
+CLEAN.include [EXE, '*.nib', 'Info.plist']
+CLOBBER.include [APP]
+
+task :default => :build
+
+desc 'Build the application'
+task :build => [APP]
+
+desc 'Launch the application'
+task :start => [APP] do
+	sh %{open '#{APP}'}
+end
+
+file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
+      File.join(APP, 'Contents', 'Resources')] + RESOURCES do
+  begin
+    v = File.read('version.txt').to_f
+  rescue Errno::ENOENT
+    v = 0.01
+  end
+
+  File.open('version.txt', 'w') {|f| f.write(v + 0.01) }
+
+	cp EXE, File.join(APP, 'Contents', 'MacOS')
+  cp 'Info.plist', File.join(APP, 'Contents')
+  cp RESOURCES, File.join(APP, 'Contents', 'Resources')
+end
+
+file EXE => COMPILE do
+  sh "gcc -arch ppc -arch i386 -Wall -lobjc -framework " +
+    FRAMEWORKS.join(" -framework ") + " " + COMPILE.join(" ") +
+    " -o #{NAME}"
+end
+
+file 'Info.plist' => "Info.plist.erb" do
+  File.open("Info.plist", "w") do |f|
+		f.puts ERB.new(File.read("Info.plist.erb")).result
+	end
+end
+
+rule '.nib' => '.xib' do |nib|
+  sh "ibtool --errors --warnings --notices --output-format human-readable-text --compile #{nib.name} #{nib.source}"
+end
+
+directory File.join(APP, 'Contents', 'MacOS')
+directory File.join(APP, 'Contents', 'Resources')

@@ -1,6 +1,3 @@
-.DS_Store
-.svn
-build
-*.xcodeproj/*.mode[0-9](v[0-9])?
-*.xcodeproj/*.pbxuser
-*.xcodeproj/*.perspective(v[0-9])?
+Hamlet*
+Info.plist
+*.nib
