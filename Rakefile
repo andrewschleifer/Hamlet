@@ -1,12 +1,7 @@
 require 'rake'
 require 'rake/clean'
 require 'erb'
-
-NAME = "Hamlet"
-BUNDLEID = "com.mutant-atomic.#{NAME}"
-RESOURCES = ['main.rb', 'main.nib', 'book.rb', 'book.nib', 'Hamlet.txt']
-FRAMEWORKS = ['RubyCocoa', 'Cocoa']
-COMPILE = ['main.m', 'WordView.m']
+require 'app'
 
 EXE = "#{NAME}"
 APP = "#{NAME}.app"
@@ -19,12 +14,12 @@ desc 'Build the application'
 task :build => [APP]
 
 desc 'Launch the application'
-task :start => [APP] do
+task :launch => [APP] do
 	sh %{open '#{APP}'}
 end
 
 file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
-      File.join(APP, 'Contents', 'Resources')] + RESOURCES do
+      File.join(APP, 'Contents', 'Resources')] + RUBY + RESOURCES do
   begin
     v = File.read('version.txt').to_f
   rescue Errno::ENOENT
@@ -35,7 +30,7 @@ file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
 
 	cp EXE, File.join(APP, 'Contents', 'MacOS')
   cp 'Info.plist', File.join(APP, 'Contents')
-  cp RESOURCES, File.join(APP, 'Contents', 'Resources')
+  cp RUBY + RESOURCES, File.join(APP, 'Contents', 'Resources')
 end
 
 file EXE => COMPILE do
