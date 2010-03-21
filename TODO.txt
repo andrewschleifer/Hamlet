@@ -1,7 +1,3 @@
-FIXMEs && TODOs
-
-generalize rakefile, most local changes to app.rb file
-
 appcontroller to open "Hamlet.txt" on start
 
 PrefPane:
