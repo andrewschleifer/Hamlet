@@ -57,29 +57,6 @@ class Book < OSX::NSDocument
     end
   end
 
-  def loadDataRepresentation_ofType(data, type)
-    # TODO actually read the file
-    #     [self setPlaying:NO];
-    # 
-    # NSMutableArray * newWords = [NSMutableArray array];
-    # NSString *fileContents = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    # NSScanner *fileScanner = [NSScanner scannerWithString:fileContents];
-    # [fileContents release];
-    # NSCharacterSet *acceptableCharacters = [[NSCharacterSet whitespaceAndNewlineCharacterSet] invertedSet];
-    # while ([fileScanner isAtEnd] == NO)
-    # {
-    #   NSString * nextWord;
-    #   [fileScanner scanCharactersFromSet:acceptableCharacters intoString:&nextWord];
-    #   [newWords addObject:[nextWord copy]];
-    # }
-    # [self setWords:newWords];
-    # 
-    # [self setRate:0.3];
-    # 
-    #       return YES;
-    false
-  end
-
   def start_a_timer
     if @timer
       @timer.invalidate
