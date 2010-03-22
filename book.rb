@@ -25,6 +25,15 @@ class Book < OSX::NSDocument
     @word_view.stringValue = @words[@index]
   end
 
+  def readFromURL_ofType_error(url, type, errorPtr)
+    @words = File.read(url.path).scan(/\S+/)
+    return true
+  end
+
+  def windowNibName
+    return "book"
+  end
+
   def start_stop
     if @playing
       @timer.invalidate
@@ -71,12 +80,6 @@ class Book < OSX::NSDocument
     false
   end
 
-  def windowNibName
-    return "book"
-  end
-
-  def windowShouldClose
-    @timer.invalidate
   def start_a_timer
     if @timer
       @timer.invalidate
