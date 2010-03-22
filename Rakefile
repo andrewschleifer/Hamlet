@@ -1,8 +1,19 @@
 require 'rake'
 require 'rake/clean'
 require 'erb'
-require 'app'
 
+begin
+  require 'app'
+rescue LoadError
+end
+
+unless defined? NAME
+  raise "I have no identity. You should define a 'NAME', probably in 'app.rb'."
+end
+
+RUBY ||= ['main.rb']
+COMPILE ||= ['main.m']
+FRAMEWORKS ||= ['RubyCocoa']
 EXE = "#{NAME}"
 APP = "#{NAME}.app"
 CLEAN.include [EXE, '*.nib', 'Info.plist']
