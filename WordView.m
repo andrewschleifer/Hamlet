@@ -2,12 +2,11 @@
 
 @implementation WordView
 
-@synthesize stringValue;
 @synthesize foregroundColor;
 @synthesize backgroundColor;
 
 #pragma mark -
-#pragma mark Setup & Teardown
+#pragma mark Setup/Teardown
 
 -(void)awakeFromNib
 {
@@ -21,6 +20,23 @@
     [foregroundColor release];
     [backgroundColor release];
     [super dealloc];
+}
+
+#pragma mark Accessor/Mutator
+
+-(NSString*)stringValue
+{
+    return stringValue;
+}
+
+-(void)setStringValue:(NSString*)s
+{
+    if (stringValue != s)
+    {
+        [stringValue release];
+        stringValue = [s copy];
+        [self setNeedsDisplay: YES];
+    }
 }
 
 #pragma mark Drawing

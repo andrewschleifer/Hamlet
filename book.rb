@@ -51,7 +51,6 @@ class Book < OSX::NSDocument
     if @playing
       @index += @rate / @rate.abs
       @word_view.stringValue = @words[@index]
-      @word_view.needsDisplay = true # FIXME this is a hack to make the view redraw
     end
   end
 
