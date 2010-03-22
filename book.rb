@@ -30,12 +30,7 @@ class Book < OSX::NSDocument
       @timer.invalidate
       @button.setTitle ">"
     else
-      @timer = OSX::NSTimer.objc_send(
-        :scheduledTimerWithTimeInterval, 1 / @rate.abs,
-        :target, self,
-        :selector, 'advance',
-        :userInfo, nil,
-        :repeats, true)
+      start_a_timer
   		@button.setTitle "||"
     end
     @playing = ! @playing
@@ -43,7 +38,7 @@ class Book < OSX::NSDocument
 
   def change_speed
     @rate = @slider.floatValue
-    start_stop; start_stop # FIXME this is a hack to restart the timer
+    start_a_timer
   end
 
   def advance
@@ -82,5 +77,15 @@ class Book < OSX::NSDocument
 
   def windowShouldClose
     @timer.invalidate
+  def start_a_timer
+    if @timer
+      @timer.invalidate
+    end
+    @timer = OSX::NSTimer.objc_send(
+      :scheduledTimerWithTimeInterval, 1 / @rate.abs,
+      :target, self,
+      :selector, 'advance',
+      :userInfo, nil,
+      :repeats, true)
   end
 end
