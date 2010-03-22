@@ -46,14 +46,14 @@ file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
 end
 
 file EXE => COMPILE do
-  sh "gcc -arch ppc -arch i386 -Wall -lobjc -framework " +
-    FRAMEWORKS.join(" -framework ") + " " + COMPILE.join(" ") +
+  sh 'gcc -arch ppc -arch i386 -Wall -lobjc -framework ' +
+    FRAMEWORKS.join(' -framework ') + ' ' + COMPILE.join(' ') +
     " -o '#{NAME}'"
 end
 
-file 'Info.plist' => "Info.plist.erb" do
-  File.open("Info.plist", "w") do |f|
-		f.puts ERB.new(File.read("Info.plist.erb")).result
+file 'Info.plist' => 'Info.plist.erb' do
+  File.open('Info.plist', 'w') do |f|
+		f.puts ERB.new(File.read('Info.plist.erb')).result
 	end
 end
 
