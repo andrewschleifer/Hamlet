@@ -11,8 +11,9 @@ unless defined? NAME
   raise "I have no identity. You should define a 'NAME', probably in 'app.rb'."
 end
 
-RUBY ||= ['main.rb']
-COMPILE ||= ['main.m']
+BUNDLEID ||= "org.example.#{NAME}"
+RUBYFILES ||= ['main.rb']
+COMPILED ||= ['main.m']
 FRAMEWORKS ||= ['RubyCocoa']
 EXE = "#{NAME}"
 APP = "#{NAME}.app"
@@ -26,7 +27,7 @@ task :build => [APP]
 
 desc 'Launch the application'
 task :launch => [APP] do
-	sh %{open '#{APP}'}
+	sh "open '#{APP}'"
 end
 
 file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
@@ -47,7 +48,7 @@ end
 file EXE => COMPILE do
   sh "gcc -arch ppc -arch i386 -Wall -lobjc -framework " +
     FRAMEWORKS.join(" -framework ") + " " + COMPILE.join(" ") +
-    " -o #{NAME}"
+    " -o '#{NAME}'"
 end
 
 file 'Info.plist' => "Info.plist.erb" do
@@ -57,7 +58,7 @@ file 'Info.plist' => "Info.plist.erb" do
 end
 
 rule '.nib' => '.xib' do |nib|
-  sh "ibtool --errors --warnings --notices --output-format human-readable-text --compile #{nib.name} #{nib.source}"
+  sh "ibtool --errors --warnings --notices --output-format human-readable-text --compile '#{nib.name}' '#{nib.source}'"
 end
 
 directory File.join(APP, 'Contents', 'MacOS')
