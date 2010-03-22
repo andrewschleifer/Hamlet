@@ -13,7 +13,7 @@ class Book < OSX::NSDocument
     @playing = false
     @rate = DEFAULT_RATE
     @timer = nil
-    @words = File.read(File.join(
+    @words ||= File.read(File.join(
       OSX::NSBundle.mainBundle.resourcePath.fileSystemRepresentation,
       'Hamlet.txt')).scan(/\S+/)
 
