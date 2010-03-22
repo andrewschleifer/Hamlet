@@ -8,8 +8,7 @@ class Book < OSX::NSDocument
   ib_outlet :button, :slider, :word_view
   kvc_accessor :index, :playing, :rate, :timer, :words
 
-  def windowControllerDidLoadNib(controller)
-    super_windowControllerDidLoadNib(controller)
+  def awakeFromNib
     @index = 0
     @playing = false
     @rate = DEFAULT_RATE
