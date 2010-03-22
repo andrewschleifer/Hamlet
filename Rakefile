@@ -26,7 +26,7 @@ file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
     v = 0.01
   end
 
-  File.open('version.txt', 'w') {|f| f.write(v + 0.01) }
+  File.open('version.txt', 'w') {|f| f.write((v + 0.01).to_s + "\n") }
 
 	cp EXE, File.join(APP, 'Contents', 'MacOS')
   cp 'Info.plist', File.join(APP, 'Contents')
