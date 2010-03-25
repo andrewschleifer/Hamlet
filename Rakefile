@@ -31,7 +31,7 @@ task :launch => [APP] do
 end
 
 file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
-      File.join(APP, 'Contents', 'Resources')] + RUBY + RESOURCES do
+      File.join(APP, 'Contents', 'Resources')] + RUBYFILES + RESOURCES do
   begin
     v = File.read('version.txt').to_f
   rescue Errno::ENOENT
@@ -42,12 +42,12 @@ file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
 
 	cp EXE, File.join(APP, 'Contents', 'MacOS')
   cp 'Info.plist', File.join(APP, 'Contents')
-  cp RUBY + RESOURCES, File.join(APP, 'Contents', 'Resources')
+  cp RUBYFILES + RESOURCES, File.join(APP, 'Contents', 'Resources')
 end
 
-file EXE => COMPILE do
+file EXE => COMPILED do
   sh 'gcc -arch ppc -arch i386 -Wall -lobjc -framework ' +
-    FRAMEWORKS.join(' -framework ') + ' ' + COMPILE.join(' ') +
+    FRAMEWORKS.join(' -framework ') + ' ' + COMPILED.join(' ') +
     " -o '#{NAME}'"
 end
 
