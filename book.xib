@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1" id="9"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -52,7 +52,7 @@
 						<object class="NSSlider" id="838673501">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">290</int>
-							<string key="NSFrame">{{18, 26}, {389, 21}}</string>
+							<string key="NSFrame">{{18, 19}, {351, 26}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSliderCell" key="NSCell" id="1027817314">
@@ -65,12 +65,12 @@
 									<int key="NSfFlags">16</int>
 								</object>
 								<reference key="NSControlView" ref="838673501"/>
-								<double key="NSMaxValue">1.000000e+02</double>
-								<double key="NSMinValue">0.000000e+00</double>
-								<double key="NSValue">2.000000e+01</double>
+								<double key="NSMaxValue">1.000000e+01</double>
+								<double key="NSMinValue">-5.000000e+00</double>
+								<double key="NSValue">3.000000e+00</double>
 								<double key="NSAltIncValue">0.000000e+00</double>
-								<int key="NSNumberOfTickMarks">0</int>
-								<int key="NSTickMarkPosition">1</int>
+								<int key="NSNumberOfTickMarks">16</int>
+								<int key="NSTickMarkPosition">0</int>
 								<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
 								<bool key="NSVertical">NO</bool>
 							</object>
@@ -78,21 +78,22 @@
 						<object class="NSButton" id="17591389">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{424, 20}, {36, 35}}</string>
+							<string key="NSFrame">{{388, 16}, {78, 32}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="482870915">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents"/>
-								<object class="NSFont" key="NSSupport">
+								<string key="NSContents">Play</string>
+								<object class="NSFont" key="NSSupport" id="714939664">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">1.300000e+01</double>
 									<int key="NSfFlags">1044</int>
 								</object>
 								<reference key="NSControlView" ref="17591389"/>
-								<int key="NSButtonFlags">-2033958657</int>
-								<int key="NSButtonFlags2">134</int>
+								<int key="NSButtonFlags">-2038021889</int>
+								<int key="NSButtonFlags2">129</int>
+								<reference key="NSAlternateImage" ref="714939664"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -102,7 +103,7 @@
 						<object class="NSCustomView" id="246895029">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{-1, 76}, {482, 196}}</string>
+							<string key="NSFrame">{{-2, 64}, {482, 206}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<string key="NSClassName">WordView</string>
 						</object>
@@ -284,7 +285,7 @@
 					<integer value="0"/>
 					<string>{196, 240}</string>
 					<string>{{357, 418}, {480, 270}}</string>
-					<reference ref="9"/>
+					<integer value="1"/>
 					<string>{300, 150}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
