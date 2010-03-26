@@ -1,23 +1,35 @@
 appcontroller to open "Hamlet.txt" on start
+full-screen view
+application icon
+icons for play/pause button
+show/hide controls
+help book
 
-PrefPane:
+preference pane:
 * foregroundColor
 * backgroundColor
 * fontFamily
 
-full-screen view
-
-Keyboard control:
+hotkeys:
 * space to togglePlayAndPause
 * arrow keys for next/previous word
 
-application icon
-icons for play/pause button
-
-Show/hide controls
-
-Playback:
-* show articles (a/an, the) with next word
+playback:
+* show articles with next word, e.g.:
+	require 'strscan'
+	l = []
+	s = StringScanner.new(words)
+	w=""
+	while (not s.eos?) && (w += s.scan_until(/\S+/).strip)
+		if ["a", "an", "the"].index(w.downcase)
+			w += " "
+			next
+		end
+		l << w
+		w = ""
+	end
+	
 * length of word should determine display time
 
-Help book
+readFromURL_ofType_error should return a more useful error when it fails:
+	http://is.gd/haDJ
