@@ -20,8 +20,15 @@ class Book < OSX::NSDocument
   end
 
   def readFromURL_ofType_error(url, type, errorPtr)
-    @words = File.read(url.path).scan(/\S+/)
-    return true
+    begin
+      @words = File.read(url.path).scan(/\S+/)
+      return true
+    rescue SystemCallError
+    	errorPtr.assign(
+    	  OSX::NSError.errorWithDomain_code_userInfo("NSErrorDomain",
+    	    OSX::NSFileReadUnknownError, nil))
+      return false
+    end
   end
 
   def windowNibName
