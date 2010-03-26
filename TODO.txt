@@ -1,21 +1,16 @@
-appcontroller to open "Hamlet.txt" on start
-full-screen view
-application icon
-icons for play/pause button
-show/hide controls
-help book
-
-preference pane:
-* foregroundColor
-* backgroundColor
-* fontFamily
-
-hotkeys:
-* space to togglePlayAndPause
-* arrow keys for next/previous word
-
-playback:
-* show articles with next word, e.g.:
+TODO space hotkey to togglePlayAndPause
+TODO left-/right-arrow hotkey for next/previous word
+TODO preferences window
+	foregroundColor
+	backgroundColor
+	fontFamily
+TODO menu item to hide/show controls
+TODO application icon
+TODO icons for play/pause button
+TODO full-screen view
+TODO appcontroller to open "Hamlet.txt" on start
+TODO help book
+TODO show articles with next word
 	require 'strscan'
 	l = []
 	s = StringScanner.new(words)
@@ -28,8 +23,6 @@ playback:
 		l << w
 		w = ""
 	end
-	
-* length of word should determine display time
-
-readFromURL_ofType_error should return a more useful error when it fails:
+TODO should length of word determine display time?
+FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
