@@ -24,3 +24,4 @@ TODO show articles with next word
 TODO should length of word determine display time?
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
+FIXME text wraps around at end
