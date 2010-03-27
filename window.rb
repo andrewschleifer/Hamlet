@@ -1,6 +1,6 @@
 require 'osx/cocoa'
 
-class Window < OSX::NSWindow
+class HWindow < OSX::NSWindow
   ib_outlet :book
 
   def keyDown(event)

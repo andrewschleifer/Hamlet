@@ -1,6 +1,6 @@
 require 'osx/cocoa'
 
-class Book < OSX::NSDocument
+class HBook < OSX::NSDocument
   ib_action :change_speed
   ib_action :start_stop
   ib_outlet :button, :slider, :word_view
