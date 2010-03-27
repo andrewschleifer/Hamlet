@@ -56,8 +56,12 @@ class Book < OSX::NSDocument
   end
 
   def advance
-    return unless @playing
-    @index += @rate / @rate.abs
+    @index += @rate / @rate.abs if @index < @words.length - 1
+    @word_view.stringValue = @words[@index]
+  end
+
+  def retreat
+    @index -= @rate / @rate.abs if @index > 0
     @word_view.stringValue = @words[@index]
   end
 
