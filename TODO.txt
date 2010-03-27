@@ -1,4 +1,3 @@
-TODO space hotkey to togglePlayAndPause
 TODO left-/right-arrow hotkey for next/previous word
 TODO preferences window
 	foregroundColor
