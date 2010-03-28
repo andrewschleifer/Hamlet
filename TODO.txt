@@ -1,7 +1,4 @@
-TODO preferences window
-	foregroundColor
-	backgroundColor
-	fontFamily
+TODO set font in preferences
 TODO menu item to hide/show controls
 TODO application icon
 TODO icons for play/pause button
@@ -25,3 +22,6 @@ TODO should length of word determine display time?
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
 FIXME text wraps around at end
+FIXME preference window loads black colors when nothing is set
+FIXME wordview doesn't update colors until next draw
+	use bindings?

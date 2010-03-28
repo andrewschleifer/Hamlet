@@ -10,8 +10,19 @@
 
 -(void)awakeFromNib
 {
-    foregroundColor = [NSColor blackColor];
-    backgroundColor = [NSColor whiteColor];
+    NSData *colorData = nil;
+
+    colorData = [[NSUserDefaults standardUserDefaults] dataForKey:@"foregroundColor"];
+    if (colorData != nil)
+        foregroundColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:colorData];
+    else
+        foregroundColor = [NSColor blackColor];
+
+    colorData = [[NSUserDefaults standardUserDefaults] dataForKey:@"backgroundColor"];
+    if (colorData != nil)
+        backgroundColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:colorData];
+    else
+        backgroundColor = [NSColor whiteColor];
 }
 
 -(void)dealloc
@@ -46,7 +57,7 @@
     const float fontSizeRatio = 1.2;
 
     NSRect bounds = [self bounds];
-    [[self backgroundColor] set];
+    [backgroundColor set];
     NSRectFill(bounds);
     const float baseFontSize = 30.0;
     NSString *fontName = @"Times New Roman";
