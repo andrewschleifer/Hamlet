@@ -27,11 +27,10 @@ task :build => [APP]
 
 desc 'Launch the application'
 task :launch => [APP] do
-	sh "open '#{APP}'"
+  sh "open '#{APP}'"
 end
 
-file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
-      File.join(APP, 'Contents', 'Resources')] + RUBYFILES + RESOURCES do
+file APP => [EXE, 'Info.plist'] + RUBYFILES + RESOURCES do
   begin
     version = YAML.load_file('version.yml')
   rescue Errno::ENOENT
@@ -41,7 +40,10 @@ file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
   version['build'] += 0.01
   File.open('version.yml', 'w') {|f| f.write(YAML::dump(version)) }
 
-	cp EXE, File.join(APP, 'Contents', 'MacOS')
+  mkdir_p File.join(APP, 'Contents', 'MacOS')
+  mkdir_p File.join(APP, 'Contents', 'Resources')
+
+  cp EXE, File.join(APP, 'Contents', 'MacOS')
   cp 'Info.plist', File.join(APP, 'Contents')
   cp RUBYFILES + RESOURCES, File.join(APP, 'Contents', 'Resources')
 end
@@ -54,13 +56,10 @@ end
 
 file 'Info.plist' => 'Info.plist.erb' do
   File.open('Info.plist', 'w') do |f|
-		f.puts ERB.new(File.read('Info.plist.erb')).result
-	end
+    f.puts ERB.new(File.read('Info.plist.erb')).result
+  end
 end
 
 rule '.nib' => '.xib' do |nib|
   sh "ibtool --errors --warnings --notices --output-format human-readable-text --compile '#{nib.name}' '#{nib.source}'"
 end
-
-directory File.join(APP, 'Contents', 'MacOS')
-directory File.join(APP, 'Contents', 'Resources')
