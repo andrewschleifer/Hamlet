@@ -1,7 +1,6 @@
 TODO set font in preferences
 TODO menu item to hide/show controls
 TODO application icon
-TODO icons for play/pause button
 TODO full-screen view
 TODO appcontroller to open "Hamlet.txt" on start
 TODO help book
@@ -20,9 +19,12 @@ TODO show articles with next word
 	end
 TODO should length of word determine display time?
 TODO normalize whitespace
+TODO credits file
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
 FIXME text wraps around at end
 FIXME preference window loads black colors when nothing is set
 FIXME wordview doesn't update colors until next draw
 	use bindings?
+FIXME credit for play/pause icons
+	http://somerandomdude.com/projects/iconic/

@@ -39,10 +39,10 @@ class HBook < OSX::NSDocument
     @playing = ! @playing
 
     if @playing
-      @button.setTitle "Play"
+      @button.image = OSX::NSImage.imageNamed("pause.png")
       start_the_timer
     else
-      @button.setTitle "Pause"
+      @button.image = OSX::NSImage.imageNamed("play.png")
       @timer.invalidate
     end
   end
