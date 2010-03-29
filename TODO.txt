@@ -24,6 +24,7 @@ FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
 FIXME text wraps around at end
 FIXME preference window loads black colors when nothing is set
+	set these in the application delegate at start-up?
 FIXME wordview doesn't update colors until next draw
 	use bindings?
 FIXME credit for play/pause icons
