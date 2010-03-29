@@ -19,6 +19,7 @@ TODO show articles with next word
 		w = ""
 	end
 TODO should length of word determine display time?
+TODO normalize whitespace
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
 FIXME text wraps around at end
