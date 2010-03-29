@@ -33,12 +33,13 @@ end
 file APP => [EXE, 'Info.plist', File.join(APP, 'Contents', 'MacOS'),
       File.join(APP, 'Contents', 'Resources')] + RUBYFILES + RESOURCES do
   begin
-    v = File.read('version.txt').to_f
+    version = YAML.load_file('version.yml')
   rescue Errno::ENOENT
-    v = 0.01
+    version = {'release' => 0.1, 'build' => 0.01}
   end
 
-  File.open('version.txt', 'w') {|f| f.write((v + 0.01).to_s + "\n") }
+  version['build'] += 0.01
+  File.open('version.yml', 'w') {|f| f.write(YAML::dump(version)) }
 
 	cp EXE, File.join(APP, 'Contents', 'MacOS')
   cp 'Info.plist', File.join(APP, 'Contents')

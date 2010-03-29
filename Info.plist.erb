@@ -48,9 +48,9 @@
     <string>NSApplication</string>
 
     <key>CFBundleVersion</key>
-    <string><%=File.read('version.txt')%></string>
+    <string><%=YAML.load_file('version.yml')['build']%></string>
     <key>CFBundleShortVersionString</key>
-    <string>2.0</string>
+    <string><%=YAML.load_file('version.yml')['release']%></string>
     <key>NSHumanReadableCopyright</key>
     <string>© 2006-2008 Various Artists</string>
 </dict>
