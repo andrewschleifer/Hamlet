@@ -19,11 +19,8 @@ TODO show articles with next word
 	end
 TODO should length of word determine display time?
 TODO normalize whitespace
-TODO credits file
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
 FIXME text wraps around at end
 FIXME wordview doesn't update colors until next draw
 	use bindings?
-FIXME credit for play/pause icons
-	http://somerandomdude.com/projects/iconic/
