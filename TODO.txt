@@ -7,6 +7,5 @@ TODO help book
 TODO normalize whitespace
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
-FIXME text wraps around at end
 FIXME wordview doesn't update colors until next draw
 	use bindings?
