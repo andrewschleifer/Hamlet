@@ -10,19 +10,8 @@
 
 -(void)awakeFromNib
 {
-    NSData *colorData = nil;
-
-    colorData = [[NSUserDefaults standardUserDefaults] dataForKey:@"foregroundColor"];
-    if (colorData != nil)
-        foregroundColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:colorData];
-    else
-        foregroundColor = [NSColor blackColor];
-
-    colorData = [[NSUserDefaults standardUserDefaults] dataForKey:@"backgroundColor"];
-    if (colorData != nil)
-        backgroundColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:colorData];
-    else
-        backgroundColor = [NSColor whiteColor];
+    backgroundColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] dataForKey:@"backgroundColor"]];
+    foregroundColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] dataForKey:@"foregroundColor"]];
 }
 
 -(void)dealloc
