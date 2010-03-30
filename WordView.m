@@ -63,11 +63,11 @@
     NSString *fontName = @"Times New Roman";
 
     NSAttributedString *attributedString = [[NSAttributedString alloc]
-        initWithString:@"12CHARACTERS" attributes:[NSDictionary dictionaryWithObjectsAndKeys: 
+        initWithString:@"12CHARACTERS" attributes:[NSDictionary dictionaryWithObjectsAndKeys:
             [NSFont fontWithName:fontName size:baseFontSize], NSFontAttributeName, nil]];
 
     NSSize stringSize = [attributedString size];
-    [attributedString release]; 
+    [attributedString release];
 
     float biggestRatio = MAX(stringSize.width / NSWidth(bounds), stringSize.height / NSHeight(bounds));
     float fontSize = (baseFontSize / biggestRatio) / fontSizeRatio;

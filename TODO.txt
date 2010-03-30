@@ -4,7 +4,6 @@ TODO application icon
 TODO full-screen view
 TODO appcontroller to open "Hamlet.txt" on start
 TODO help book
-TODO normalize whitespace
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
 FIXME wordview doesn't update colors until next draw
