@@ -1,6 +1,7 @@
 require 'rake'
 require 'rake/clean'
 require 'erb'
+require 'yaml'
 
 begin
   require 'app'
