@@ -4,20 +4,6 @@ TODO application icon
 TODO full-screen view
 TODO appcontroller to open "Hamlet.txt" on start
 TODO help book
-TODO show articles with next word
-	require 'strscan'
-	l = []
-	s = StringScanner.new(words)
-	w=""
-	while (not s.eos?) && (w += s.scan_until(/\S+/).strip)
-		if ["a", "an", "the"].index(w.downcase)
-			w += " "
-			next
-		end
-		l << w
-		w = ""
-	end
-TODO should length of word determine display time?
 TODO normalize whitespace
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
