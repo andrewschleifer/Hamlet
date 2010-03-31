@@ -1,17 +1,35 @@
 require 'osx/cocoa'
 
 class HView < OSX::NSView
-  kvc_accessor :foregroundColor, :backgroundColor, :stringValue
+  attr_reader :stringValue
+  kvc_accessor :foregroundColor, :backgroundColor
+
+  def initialize
+    OSX::NSNotificationCenter.defaultCenter.objc_send(
+      :addObserver, self,
+      :selector, 'preferencesChanged',
+      :name, OSX::NSUserDefaultsDidChangeNotification,
+      :object, nil)
+  end
+
+  def dealloc
+    OSX::NSNotificationCenter.defaultCenter.removeObserver(self)
+  end
 
   def awakeFromNib
-    @backgroundColor = OSX::NSUnarchiver.unarchiveObjectWithData(
-      OSX::NSUserDefaults.standardUserDefaults.dataForKey("backgroundColor"))
-    @foregroundColor = OSX::NSUnarchiver.unarchiveObjectWithData(
-      OSX::NSUserDefaults.standardUserDefaults.dataForKey("foregroundColor"))
+    self.preferencesChanged(nil)
   end
 
   def stringValue=(s)
     @stringValue = s
+    self.needsDisplay = true
+  end
+
+  def preferencesChanged(note)
+    @backgroundColor = OSX::NSUnarchiver.unarchiveObjectWithData(
+      OSX::NSUserDefaults.standardUserDefaults.dataForKey("backgroundColor"))
+    @foregroundColor = OSX::NSUnarchiver.unarchiveObjectWithData(
+      OSX::NSUserDefaults.standardUserDefaults.dataForKey("foregroundColor"))
     self.needsDisplay = true
   end
 

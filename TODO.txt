@@ -2,12 +2,11 @@ TODO set font in preferences
 TODO menu item to hide/show controls
 TODO application icon
 TODO full-screen view
+	NSView has a full screen mode
 TODO appcontroller to open "Hamlet.txt" on start
 TODO help book
 FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
-FIXME wordview doesn't update colors until next draw
-	use bindings?
 TODO run the app with a load path that excludes site-speciﬁc libraries and gems
 TODO bust up the app['bundle'] rule in rakefile
 	still too much unneeded work
