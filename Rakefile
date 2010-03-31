@@ -15,7 +15,7 @@ end
 BUNDLEID ||= "org.example.#{NAME}"
 RUBYFILES ||= ['main.rb']
 COMPILED ||= ['main.m']
-FRAMEWORKS ||= ['RubyCocoa']
+FRAMEWORKS = ['RubyCocoa']
 EXE = "#{NAME}"
 APP = "#{NAME}.app"
 CLEAN.include [EXE, '*.nib', 'Info.plist']
