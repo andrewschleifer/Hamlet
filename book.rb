@@ -58,7 +58,6 @@ class HBook < OSX::NSDocument
   def advance
     @index += @rate / @rate.abs if @index < @words.length - 1
     @word_view.stringValue = @words[@index]
-    @word_view.needsDisplay = true
   end
 
   def retreat

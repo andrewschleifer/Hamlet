@@ -32,21 +32,16 @@
         </dict>
     </array>
 
-    <key>CFBundleExecutable</key>
-    <string><%=EXE%></string>
     <key>CFBundleIdentifier</key>
-    <string><%=BUNDLEID%></string>
-
+    <string><%=YAML.load_file('app.yml')['bundle_id']%></string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
-
     <key>CFBundleIconFile</key>
     <string>icon</string>
     <key>NSMainNibFile</key>
     <string>main</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
-
     <key>CFBundleVersion</key>
     <string><%=YAML.load_file('version.yml')['build']%></string>
     <key>CFBundleShortVersionString</key>

@@ -8,5 +8,6 @@ FIXME readFromURL_ofType_error should return a more useful error when it fails
 	http://is.gd/haDJ
 FIXME wordview doesn't update colors until next draw
 	use bindings?
-TODO a.out instead of EXE
-FIXME @word_view.needsDisplay shouldn't be in book.rb
+TODO run the app with a load path that excludes site-speciﬁc libraries and gems
+TODO bust up the app['bundle'] rule in rakefile
+	still too much unneeded work

@@ -4,34 +4,33 @@ require 'erb'
 require 'yaml'
 
 begin
-  require 'app'
+  app = YAML.load_file('app.yml')
 rescue LoadError
 end
 
-unless defined? NAME
-  raise "I have no identity. You should define a 'NAME', probably in 'app.rb'."
+unless defined? app['name']
+  raise "I have no identity. You should define a 'name', probably in 'app.yml'."
 end
 
-BUNDLEID ||= "org.example.#{NAME}"
-RUBYFILES ||= ['main.rb']
-COMPILED ||= ['main.m']
-FRAMEWORKS = ['RubyCocoa']
-EXE = "#{NAME}"
-APP = "#{NAME}.app"
-CLEAN.include [EXE, '*.nib', 'Info.plist']
-CLOBBER.include [APP]
+app['bundle_id'] ||= "org.example.#{app['name']}"
+app['ruby_files'] ||= ['main.rb']
+app['objc_files'] ||= ['main.m']
+app['frameworks'] ||= ['RubyCocoa']
+app['bundle'] = "#{app['name']}.app"
+CLEAN.include ['a.out', '*.nib', 'Info.plist']
+CLOBBER.include [app['bundle']]
 
 task :default => :build
 
 desc 'Build the application'
-task :build => [APP]
+task :build => [app['bundle']]
 
 desc 'Launch the application'
-task :launch => [APP] do
-  sh "open '#{APP}'"
+task :launch => [app['bundle']] do
+  sh "open '#{app['bundle']}'"
 end
 
-file APP => [EXE, 'Info.plist'] + RUBYFILES + RESOURCES do
+file app['bundle'] => ['a.out', 'Info.plist'] + app['ruby_files'] + app['resources'] do
   begin
     version = YAML.load_file('version.yml')
   rescue Errno::ENOENT
@@ -41,18 +40,17 @@ file APP => [EXE, 'Info.plist'] + RUBYFILES + RESOURCES do
   version['build'] += 0.01
   File.open('version.yml', 'w') {|f| f.write(YAML::dump(version)) }
 
-  mkdir_p File.join(APP, 'Contents', 'MacOS')
-  mkdir_p File.join(APP, 'Contents', 'Resources')
+  mkdir_p File.join(app['bundle'], 'Contents', 'MacOS')
+  mkdir_p File.join(app['bundle'], 'Contents', 'Resources')
 
-  cp EXE, File.join(APP, 'Contents', 'MacOS')
-  cp 'Info.plist', File.join(APP, 'Contents')
-  cp RUBYFILES + RESOURCES, File.join(APP, 'Contents', 'Resources')
+  cp 'a.out', File.join(app['bundle'], 'Contents', 'MacOS', app['name'])
+  cp 'Info.plist', File.join(app['bundle'], 'Contents')
+  cp app['ruby_files'] + app['resources'], File.join(app['bundle'], 'Contents', 'Resources')
 end
 
-file EXE => COMPILED do
+file 'a.out' => app['objc_files'] do
   sh 'gcc -arch ppc -arch i386 -Wall -lobjc -framework ' +
-    FRAMEWORKS.join(' -framework ') + ' ' + COMPILED.join(' ') +
-    " -o '#{NAME}'"
+    app['frameworks'].join(' -framework ') + ' ' + app['objc_files'].join(' ')
 end
 
 file 'Info.plist' => 'Info.plist.erb' do

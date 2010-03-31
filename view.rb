@@ -10,6 +10,11 @@ class HView < OSX::NSView
       OSX::NSUserDefaults.standardUserDefaults.dataForKey("foregroundColor"))
   end
 
+  def stringValue=(s)
+    @stringValue = s
+    self.needsDisplay = true
+  end
+
   def drawRect(rect)
     fontSizeRatio = 1.2
     @backgroundColor.set

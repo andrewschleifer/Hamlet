@@ -1,0 +1,18 @@
+name: Hamlet
+bundle_id: com.mutant-atomic.Hamlet
+ruby_files:
+    - main.rb
+    - book.rb
+    - delegate.rb
+    - view.rb
+    - window.rb
+objc_files:
+    - main.m
+resources:
+    - main.nib
+    - book.nib
+    - preferences.nib
+    - Credits.html
+    - play.png
+    - pause.png
+    - Hamlet.txt
