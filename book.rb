@@ -20,15 +20,33 @@ class HBook < OSX::NSDocument
   end
 
   def readFromURL_ofType_error(url, type, errorPtr)
+    problem = false
     begin
       @words = File.read(url.path).scan(/\S+/)
-      return true
-    rescue SystemCallError
-    	errorPtr.assign(
-    	  OSX::NSError.errorWithDomain_code_userInfo("NSErrorDomain",
-    	    OSX::NSFileReadUnknownError, nil))
-      return false
+    rescue SystemCallError => e
+      problem = e.errno
     end
+
+    if problem
+  	  errorPtr.assign(
+    	  OSX::NSError.errorWithDomain_code_userInfo("NSErrorDomain",
+          case problem
+            when 1 # Errno::EPERM
+              OSX::NSFileReadNoPermissionError
+    	      when 2 # Errno::ENOENT
+    	        OSX::NSFileNoSuchFileError
+            when 27 # Errno::EFBIG
+              OSX::NSFileReadTooLargeError
+            when 36 # Errno::ENAMETOOLONG
+              OSX::NSFileReadInvalidFileNameError
+            when 37 # Errno::ENOLCK
+              OSX::NSFileLockingError
+            else
+             OSX::NSFileReadUnknownError 
+          end, nil))
+    end
+
+    return ! problem
   end
 
   def windowNibName
