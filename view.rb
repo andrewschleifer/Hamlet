@@ -2,7 +2,7 @@ require 'osx/cocoa'
 
 class HView < OSX::NSView
   attr_reader :stringValue
-  kvc_accessor :foregroundColor, :backgroundColor
+  kvc_accessor :fontName, :foregroundColor, :backgroundColor
 
   def initialize
     OSX::NSNotificationCenter.defaultCenter.objc_send(
@@ -26,6 +26,7 @@ class HView < OSX::NSView
   end
 
   def preferencesChanged(note)
+    @fontName = OSX::NSUserDefaults.standardUserDefaults.stringForKey("fontName")
     @backgroundColor = OSX::NSUnarchiver.unarchiveObjectWithData(
       OSX::NSUserDefaults.standardUserDefaults.dataForKey("backgroundColor"))
     @foregroundColor = OSX::NSUnarchiver.unarchiveObjectWithData(
@@ -38,21 +39,25 @@ class HView < OSX::NSView
     @backgroundColor.set
     OSX::NSRectFill(self.bounds)
     baseFontSize = 30.0
-    fontName = "Times New Roman"
 
     attributedString = OSX::NSAttributedString.alloc.objc_send(
       :initWithString, "12CHARACTERS",
-      :attributes, {OSX::NSFontAttributeName => OSX::NSFont.fontWithName_size(fontName, baseFontSize)})
+      :attributes, {
+        OSX::NSFontAttributeName => OSX::NSFont.fontWithName_size(@fontName,
+                                      baseFontSize)})
 
     stringSize = attributedString.size
 
-    biggestRatio = [stringSize.width / self.bounds.width, stringSize.height / self.bounds.height].max
+    biggestRatio = [stringSize.width / self.bounds.width,
+      stringSize.height / self.bounds.height].max
+
     fontSize = (baseFontSize / biggestRatio) / fontSizeRatio;
 
     attributedString = OSX::NSAttributedString.alloc.objc_send(
       :initWithString, @stringValue,
       :attributes, {
-        OSX::NSFontAttributeName => OSX::NSFont.fontWithName_size(fontName, fontSize),
+        OSX::NSFontAttributeName => OSX::NSFont.fontWithName_size(
+          @fontName, fontSize),
         OSX::NSForegroundColorAttributeName => @foregroundColor})
 
     stringSize = attributedString.size

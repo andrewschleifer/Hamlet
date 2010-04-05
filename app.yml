@@ -4,6 +4,7 @@ ruby_files:
     - main.rb
     - book.rb
     - delegate.rb
+    - preferences.rb
     - view.rb
     - window.rb
 objc_files:
