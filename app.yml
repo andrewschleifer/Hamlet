@@ -1,5 +1,5 @@
-name: Hamlet
-bundle_id: com.mutant-atomic.Hamlet
+name: Deuterium
+bundle_id: com.mutant-atomic.Deuterium
 ruby_files:
     - main.rb
     - book.rb
@@ -16,4 +16,3 @@ resources:
     - Credits.html
     - play.png
     - pause.png
-    - Hamlet.txt
