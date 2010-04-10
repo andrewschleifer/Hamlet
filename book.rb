@@ -1,9 +1,9 @@
 require 'osx/cocoa'
 
 class HBook < OSX::NSDocument
-  ib_action :change_speed
-  ib_action :start_stop
-  ib_outlet :button, :slider, :word_view
+  ib_action :changeSpeed
+  ib_action :startStop
+  ib_outlet :button, :slider, :wordView
   kvc_accessor :index, :playing, :rate, :timer, :words
 
   def initialize
@@ -16,21 +16,17 @@ class HBook < OSX::NSDocument
 
   def awakeFromNib
     @slider.floatValue = @rate
-    @word_view.stringValue = @words[@index]
+    @wordView.stringValue = @words[@index]
   end
 
   def readFromURL_ofType_error(url, type, errorPtr)
-    problem = false
     begin
       @words = File.read(url.path).scan(/\S+/)
+      true
     rescue SystemCallError => e
-      problem = e.errno
-    end
-
-    if problem
   	  errorPtr.assign(
     	  OSX::NSError.errorWithDomain_code_userInfo("NSErrorDomain",
-          case problem
+          case e.errno
             when 1 # Errno::EPERM
               OSX::NSFileReadNoPermissionError
     	      when 2 # Errno::ENOENT
@@ -44,16 +40,15 @@ class HBook < OSX::NSDocument
             else
              OSX::NSFileReadUnknownError 
           end, nil))
+      false
     end
-
-    return ! problem
   end
 
   def windowNibName
-    return "book"
+    "book"
   end
 
-  def start_stop
+  def startStop
     @playing = ! @playing
 
     if @playing
@@ -65,7 +60,7 @@ class HBook < OSX::NSDocument
     end
   end
 
-  def change_speed
+  def changeSpeed
     @rate = @slider.floatValue
     if @playing
       @timer.invalidate
@@ -75,12 +70,15 @@ class HBook < OSX::NSDocument
 
   def advance
     @index += @rate / @rate.abs if @index < @words.length - 1
-    @word_view.stringValue = @words[@index]
+    @wordView.stringValue = @words[@index]
+    if @playing && @index == @words.length - 1
+      self.startStop
+    end
   end
 
   def retreat
     @index -= @rate / @rate.abs if @index > 0
-    @word_view.stringValue = @words[@index]
+    @wordView.stringValue = @words[@index]
   end
 
   def start_the_timer
