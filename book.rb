@@ -69,16 +69,21 @@ class HBook < OSX::NSDocument
   end
 
   def advance
-    @index += @rate / @rate.abs if @index < @words.length - 1
-    @wordView.stringValue = @words[@index]
-    if @playing && @index == @words.length - 1
-      self.startStop
-    end
+    move(@rate / @rate.abs)
   end
 
-  def retreat
-    @index -= @rate / @rate.abs if @index > 0
+  def move(distance)
+    @index = [@index + distance, @words.length - 1].min
+    @index = [@index, 0].max
     @wordView.stringValue = @words[@index]
+    if @playing
+      if (@index == @words.length - 1 || @index == 0)
+        self.startStop
+      else
+        @timer.invalidate
+        start_the_timer
+      end
+    end
   end
 
   def start_the_timer
