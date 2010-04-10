@@ -5,17 +5,6 @@ class HView < OSX::NSView
   kvc_accessor :fontName, :foregroundColor, :backgroundColor
 
   def initialize
-    OSX::NSUserDefaults.standardUserDefaults.registerDefaults(
-      OSX::NSDictionary.dictionaryWithContentsOfFile(
-        OSX::NSBundle.mainBundle.pathForResource_ofType("view", "plist")))
-
-    unless OSX::NSFontManager.sharedFontManager.availableFonts.index(
-        OSX::NSUserDefaults.standardUserDefaults.stringForKey("fontName"))
-      OSX::NSUserDefaults.standardUserDefaults.setValue_forKey(
-        OSX::NSFont.systemFontOfSize(OSX::NSFont.systemFontSize).familyName,
-        "fontName")
-    end
-
     OSX::NSNotificationCenter.defaultCenter.objc_send(
       :addObserver, self,
       :selector, 'preferencesChanged',

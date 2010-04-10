@@ -10,8 +10,9 @@ class HPreferences < OSX::NSObject
   end
 
   def selectedFontIndex=(i)
-    OSX::NSUserDefaults.standardUserDefaults.setValue_forKey(
-      @fontList[i], "fontName")
+    OSX::NSUserDefaults.standardUserDefaults.objc_send(
+      :setValue, @fontList[i],
+      :forKey, "fontName")
     @selectedFontIndex = i
   end
 
