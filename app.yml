@@ -1,5 +1,5 @@
-name: Deuterium
-bundle_id: com.mutant-atomic.Deuterium
+name: Deuteranopia
+bundle_id: com.mutant-atomic.Deuteranopia
 ruby_files:
     - main.rb
     - book.rb
