@@ -17,7 +17,7 @@ class HView < OSX::NSView
   end
 
   def awakeFromNib
-    self.preferencesChanged(nil)
+    self.preferencesChanged(self)
   end
 
   def stringValue=(s)
@@ -35,44 +35,35 @@ class HView < OSX::NSView
   end
 
   def drawRect(rect)
-    fontSizeRatio = 1.2
     @backgroundColor.set
     OSX::NSRectFill(self.bounds)
-    baseFontSize = 30.0
 
-    unless OSX::NSFontManager.sharedFontManager.availableFontFamilies.index(@fontName)
-      @fontName = OSX::NSUserDefaults.standardUserDefaults.setValue_forKey(
-        OSX::NSFont.systemFontOfSize(OSX::NSFont.systemFontSize).familyName,
-        "fontName")
+    baseFontSize = 30.0
+    fontName = @fontName
+
+    unless OSX::NSFontManager.sharedFontManager.availableFontFamilies.index(fontName)
+      fontName = OSX::NSFont.systemFontOfSize(OSX::NSFont.systemFontSize).familyName
     end
 
-    attributedString = OSX::NSAttributedString.alloc.objc_send(
-      :initWithString, "12CHARACTERS",
-      :attributes, {
-        OSX::NSFontAttributeName => OSX::NSFont.fontWithName_size(@fontName,
+    word = OSX::NSAttributedString.alloc.initWithString_attributes(
+      "12CHARACTERS", {
+        OSX::NSFontAttributeName => OSX::NSFont.fontWithName_size(fontName,
                                       baseFontSize)})
 
-    stringSize = attributedString.size
+    biggestRatio = [word.size.width / self.bounds.width,
+                    word.size.height / self.bounds.height].max
 
-    biggestRatio = [stringSize.width / self.bounds.width,
-      stringSize.height / self.bounds.height].max
-
-    fontSize = (baseFontSize / biggestRatio) / fontSizeRatio;
-
-    attributedString = OSX::NSAttributedString.alloc.objc_send(
-      :initWithString, @stringValue,
-      :attributes, {
+    word = OSX::NSAttributedString.alloc.initWithString_attributes(
+      @stringValue, {
         OSX::NSFontAttributeName => OSX::NSFont.fontWithName_size(
-          @fontName, fontSize),
+                                      fontName, baseFontSize / biggestRatio),
         OSX::NSForegroundColorAttributeName => @foregroundColor})
 
-    stringSize = attributedString.size
-
-    attributedString.drawInRect OSX::NSRect.new(
-      (self.bounds.width - stringSize.width) / 2,
-      (self.bounds.height - stringSize.height) / 2 + stringSize.height / 15,
-      stringSize.width,
-      stringSize.height)
+    word.drawInRect OSX::NSRect.new(
+      (self.bounds.width - word.size.width) / 2,
+      (self.bounds.height - word.size.height) / 2 + word.size.height / 15,
+      word.size.width,
+      word.size.height)
   end
 
 end
