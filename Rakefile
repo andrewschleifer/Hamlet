@@ -53,7 +53,7 @@ file 'a.out' => app['objc_files'] do
     app['frameworks'].join(' -framework ') + ' ' + app['objc_files'].join(' ')
 end
 
-file 'Info.plist' => 'Info.plist.erb' do
+file 'Info.plist' => ['Info.plist.erb', 'version.yml'] do
   File.open('Info.plist', 'w') do |f|
     f.puts ERB.new(File.read('Info.plist.erb')).result
   end
