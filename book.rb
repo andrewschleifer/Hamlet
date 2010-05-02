@@ -96,7 +96,6 @@ class HBook < OSX::NSDocument
   end
 
   def keyDown(event)
-    puts event.keyCode
     case event.keyCode
       when 49 then self.startStop               # space
       when 53 then self.wordView.exitFullScreen # escape
