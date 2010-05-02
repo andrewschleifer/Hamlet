@@ -20,14 +20,23 @@ app['bundle'] = "#{app['name']}.app"
 CLEAN.include ['a.out', '*.nib', 'Info.plist']
 CLOBBER.include [app['bundle']]
 
-task :default => :build
+task :default => :'app:build'
 
-desc 'Build the application'
-task :build => [app['bundle']]
+namespace :app do
+  desc 'Build the application.'
+  task :build => [app['bundle']]
 
-desc 'Launch the application'
-task :launch => [app['bundle']] do
-  sh "open '#{app['bundle']}'"
+  desc 'Launch the application.'
+  task :launch => [app['bundle']] do
+    sh "open '#{app['bundle']}'"
+  end
+end
+
+namespace :prefs do
+  desc 'Remove user preferences for the application.'
+  task :rm do
+    rm File.join(ENV['HOME'], 'Library/Preferences', app['bundle_id'] + ".plist")
+  end
 end
 
 file app['bundle'] => ['a.out', 'Info.plist'] + app['ruby_files'] + app['resources'] do
