@@ -2,6 +2,7 @@ require 'osx/cocoa'
 
 class HView < OSX::NSView
   attr_reader :stringValue
+  ib_outlet :controller
   kvc_accessor :fontName, :foregroundColor, :backgroundColor
 
   def initialize
@@ -32,6 +33,18 @@ class HView < OSX::NSView
     @foregroundColor = OSX::NSUnarchiver.unarchiveObjectWithData(
       OSX::NSUserDefaults.standardUserDefaults.dataForKey("foregroundColor"))
     self.needsDisplay = true
+  end
+
+  def keyDown(event)
+    @controller.keyDown(event)
+  end
+
+  def enterFullScreen
+    self.enterFullScreenMode_withOptions(OSX::NSScreen.mainScreen, nil)
+  end
+
+  def exitFullScreen
+    self.exitFullScreenModeWithOptions(nil)
   end
 
   def drawRect(rect)

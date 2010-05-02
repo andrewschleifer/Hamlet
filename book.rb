@@ -4,7 +4,7 @@ class HBook < OSX::NSDocument
   ib_action :changeSpeed
   ib_action :startStop
   ib_outlet :button, :slider, :wordView
-  kvc_accessor :index, :playing, :rate, :timer, :words
+  kvc_accessor :index, :playing, :rate, :timer, :words, :wordView
 
   def initialize
     @index = 0
@@ -93,6 +93,16 @@ class HBook < OSX::NSDocument
       :selector, 'advance',
       :userInfo, nil,
       :repeats, true)
+  end
+
+  def keyDown(event)
+    puts event.keyCode
+    case event.keyCode
+      when 49 then self.startStop               # space
+      when 53 then self.wordView.exitFullScreen # escape
+      when 124 then self.move(1)                # right arrow
+      when 123 then self.move(-1)               # left arrow
+    end
   end
 
 end
