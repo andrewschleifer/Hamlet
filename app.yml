@@ -1,5 +1,5 @@
-name: Deuteranopia
-bundle_id: com.mutant-atomic.Deuteranopia
+name: Hamlet
+bundle_id: com.mutant-atomic.Hamlet
 ruby_files:
     - main.rb
     - book.rb
@@ -17,3 +17,4 @@ resources:
     - play.png
     - pause.png
     - view.plist
+    - Hamlet.txt
